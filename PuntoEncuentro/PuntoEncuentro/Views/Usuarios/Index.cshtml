@@ -1,0 +1,175 @@
+﻿@model IEnumerable<PuntoEncuentro.Entidades.t_Usuarios>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="usuarios" class="table">
+    <thead>
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tipoIdNumUsuario)*@
+            Tipo Documento
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.primerNombre)*@
+            Primer Nombre
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.segundoNombre)*@
+            Segundo Nombre
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.primerApellido)*@
+            Primer Apellido
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.segundoApellido)*@
+            Segundo Apellido
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tipoUsuario)*@
+            Tipo de Usuario
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.fechaNacimiento)*@
+            Fecha de Nacimiento
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Celular)*@
+            Celular
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.NumeroFijo)*@
+            Número Fijo
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.CorreoElectronico)*@
+            Correo Electronico
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Ocupacion)*@
+            Ocupacion
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.t_EstadoCivil.NombreEstadoCivil)*@
+            Estado Civil
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.t_TipoSexo.NombreTipoSexo)*@
+            Sexo
+        </th>
+        <th>
+            Operaciones
+        </th>
+    </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                Tipo Documento
+            </th>
+            <th>
+                Primer Nombre
+            </th>
+            <th>
+                Segundo Nombre
+            </th>
+            <th>
+                Primer Apellido
+            </th>
+            <th>
+                Segundo Apellido
+            </th>
+            <th>
+                Tipo de Usuario
+            </th>
+            <th>
+                Fecha de Nacimiento
+            </th>
+            <th>
+                Celular
+            </th>
+            <th>
+                Número Fijo
+            </th>
+            <th>
+                Correo Electronico
+            </th>
+            <th>
+                Ocupacion
+            </th>
+            <th>
+                Estado Civil
+            </th>
+            <th>
+                Sexo
+            </th>
+            <th>
+                Operaciones
+            </th>
+        </tr></tfoot>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoIdNumUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.primerNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.segundoNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.primerApellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.segundoApellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Celular)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroFijo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorreoElectronico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ocupacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.t_EstadoCivil.NombreEstadoCivil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.t_TipoSexo.NombreTipoSexo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.numIdUsuario}) |
+                @Html.ActionLink("Details", "Details", new {id = item.numIdUsuario}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.numIdUsuario})
+            </td>
+        </tr>
+    }
+        
+    </tbody>
+</table>
+
+<script type="text/javascript" charset="utf8">
+    $(document).ready( function () {
+        $('#usuarios').DataTable();
+    } );
+</script>
+    
+

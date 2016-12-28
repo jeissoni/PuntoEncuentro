@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PUNTO_ENCUENTRO_Modelo.Store" Provider="Npgsql" ProviderManifestToken="9.4.8" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="t_EstadoCivil">
+          <Key>
+            <PropertyRef Name="IdEstadoCivil" />
+          </Key>
+          <Property Name="IdEstadoCivil" Type="int4" Nullable="false" />
+          <Property Name="NombreEstadoCivil" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_TipoSexo">
+          <Key>
+            <PropertyRef Name="IdTipoSexo" />
+          </Key>
+          <Property Name="IdTipoSexo" Type="int4" Nullable="false" />
+          <Property Name="NombreTipoSexo" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="t_UsuarioLogin">
+          <Key>
+            <PropertyRef Name="UsuarioLogin" />
+          </Key>
+          <Property Name="UsuarioLogin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdNumUsuario" Type="int4" />
+        </EntityType>
+        <EntityType Name="t_Usuarios">
+          <Key>
+            <PropertyRef Name="numIdUsuario" />
+          </Key>
+          <Property Name="numIdUsuario" Type="int4" Nullable="false" />
+          <Property Name="tipoIdNumUsuario" Type="varchar" MaxLength="2" />
+          <Property Name="primerNombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="segundoNombre" Type="varchar" MaxLength="50" />
+          <Property Name="primerApellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="segundoApellido" Type="varchar" MaxLength="50" />
+          <Property Name="tipoUsuario" Type="int4" />
+          <Property Name="fechaNacimiento" Type="date" />
+          <Property Name="Celular" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroFijo" Type="varchar" MaxLength="50" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="100" />
+          <Property Name="Ocupacion" Type="varchar" MaxLength="100" />
+          <Property Name="Sexo" Type="int4" />
+          <Property Name="EstadoCivil" Type="int4" />
+        </EntityType>
+        <Association Name="fk_EstadoCivil">
+          <End Role="t_EstadoCivil" Type="Self.t_EstadoCivil" Multiplicity="0..1" />
+          <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_EstadoCivil">
+              <PropertyRef Name="IdEstadoCivil" />
+            </Principal>
+            <Dependent Role="t_Usuarios">
+              <PropertyRef Name="EstadoCivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TipoSexo">
+          <End Role="t_TipoSexo" Type="Self.t_TipoSexo" Multiplicity="0..1" />
+          <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_TipoSexo">
+              <PropertyRef Name="IdTipoSexo" />
+            </Principal>
+            <Dependent Role="t_Usuarios">
+              <PropertyRef Name="Sexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Usuario">
+          <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="0..1" />
+          <End Role="t_UsuarioLogin" Type="Self.t_UsuarioLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Usuarios">
+              <PropertyRef Name="numIdUsuario" />
+            </Principal>
+            <Dependent Role="t_UsuarioLogin">
+              <PropertyRef Name="IdNumUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PUNTO_ENCUENTRO_ModeloStoreContainer">
+          <EntitySet Name="t_EstadoCivil" EntityType="Self.t_EstadoCivil" Schema="public" store:Type="Tables" />
+          <EntitySet Name="t_TipoSexo" EntityType="Self.t_TipoSexo" Schema="public" store:Type="Tables" />
+          <EntitySet Name="t_UsuarioLogin" EntityType="Self.t_UsuarioLogin" Schema="public" store:Type="Tables" />
+          <EntitySet Name="t_Usuarios" EntityType="Self.t_Usuarios" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="fk_EstadoCivil" Association="Self.fk_EstadoCivil">
+            <End Role="t_EstadoCivil" EntitySet="t_EstadoCivil" />
+            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TipoSexo" Association="Self.fk_TipoSexo">
+            <End Role="t_TipoSexo" EntitySet="t_TipoSexo" />
+            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Usuario" Association="Self.fk_Usuario">
+            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+            <End Role="t_UsuarioLogin" EntitySet="t_UsuarioLogin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PUNTO_ENCUENTRO_Modelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="t_EstadoCivil">
+          <Key>
+            <PropertyRef Name="IdEstadoCivil" />
+          </Key>
+          <Property Name="IdEstadoCivil" Type="Int32" Nullable="false" />
+          <Property Name="NombreEstadoCivil" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="t_Usuarios" Relationship="Self.fk_EstadoCivil" FromRole="t_EstadoCivil" ToRole="t_Usuarios" />
+        </EntityType>
+        <EntityType Name="t_TipoSexo">
+          <Key>
+            <PropertyRef Name="IdTipoSexo" />
+          </Key>
+          <Property Name="IdTipoSexo" Type="Int32" Nullable="false" />
+          <Property Name="NombreTipoSexo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="t_Usuarios" Relationship="Self.fk_TipoSexo" FromRole="t_TipoSexo" ToRole="t_Usuarios" />
+        </EntityType>
+        <EntityType Name="t_UsuarioLogin">
+          <Key>
+            <PropertyRef Name="UsuarioLogin" />
+          </Key>
+          <Property Name="UsuarioLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdNumUsuario" Type="Int32" />
+          <NavigationProperty Name="t_Usuarios" Relationship="Self.fk_Usuario" FromRole="t_UsuarioLogin" ToRole="t_Usuarios" />
+        </EntityType>
+        <EntityType Name="t_Usuarios">
+          <Key>
+            <PropertyRef Name="numIdUsuario" />
+          </Key>
+          <Property Name="numIdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="tipoIdNumUsuario" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="primerNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="segundoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="primerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="segundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tipoUsuario" Type="Int32" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Celular" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroFijo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ocupacion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sexo" Type="Int32" />
+          <Property Name="EstadoCivil" Type="Int32" />
+          <NavigationProperty Name="t_EstadoCivil" Relationship="Self.fk_EstadoCivil" FromRole="t_Usuarios" ToRole="t_EstadoCivil" />
+          <NavigationProperty Name="t_TipoSexo" Relationship="Self.fk_TipoSexo" FromRole="t_Usuarios" ToRole="t_TipoSexo" />
+          <NavigationProperty Name="t_UsuarioLogin" Relationship="Self.fk_Usuario" FromRole="t_Usuarios" ToRole="t_UsuarioLogin" />
+        </EntityType>
+        <Association Name="fk_EstadoCivil">
+          <End Role="t_EstadoCivil" Type="Self.t_EstadoCivil" Multiplicity="0..1" />
+          <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_EstadoCivil">
+              <PropertyRef Name="IdEstadoCivil" />
+            </Principal>
+            <Dependent Role="t_Usuarios">
+              <PropertyRef Name="EstadoCivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TipoSexo">
+          <End Role="t_TipoSexo" Type="Self.t_TipoSexo" Multiplicity="0..1" />
+          <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_TipoSexo">
+              <PropertyRef Name="IdTipoSexo" />
+            </Principal>
+            <Dependent Role="t_Usuarios">
+              <PropertyRef Name="Sexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Usuario">
+          <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="0..1" />
+          <End Role="t_UsuarioLogin" Type="Self.t_UsuarioLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Usuarios">
+              <PropertyRef Name="numIdUsuario" />
+            </Principal>
+            <Dependent Role="t_UsuarioLogin">
+              <PropertyRef Name="IdNumUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PUNTO_ENCUENTRO_Entidades" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_EstadoCivil" EntityType="Self.t_EstadoCivil" />
+          <EntitySet Name="t_TipoSexo" EntityType="Self.t_TipoSexo" />
+          <EntitySet Name="t_UsuarioLogin" EntityType="Self.t_UsuarioLogin" />
+          <EntitySet Name="t_Usuarios" EntityType="Self.t_Usuarios" />
+          <AssociationSet Name="fk_EstadoCivil" Association="Self.fk_EstadoCivil">
+            <End Role="t_EstadoCivil" EntitySet="t_EstadoCivil" />
+            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TipoSexo" Association="Self.fk_TipoSexo">
+            <End Role="t_TipoSexo" EntitySet="t_TipoSexo" />
+            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Usuario" Association="Self.fk_Usuario">
+            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+            <End Role="t_UsuarioLogin" EntitySet="t_UsuarioLogin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PUNTO_ENCUENTRO_ModeloStoreContainer" CdmEntityContainer="PUNTO_ENCUENTRO_Entidades">
+          <EntitySetMapping Name="t_EstadoCivil">
+            <EntityTypeMapping TypeName="PUNTO_ENCUENTRO_Modelo.t_EstadoCivil">
+              <MappingFragment StoreEntitySet="t_EstadoCivil">
+                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
+                <ScalarProperty Name="NombreEstadoCivil" ColumnName="NombreEstadoCivil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_TipoSexo">
+            <EntityTypeMapping TypeName="PUNTO_ENCUENTRO_Modelo.t_TipoSexo">
+              <MappingFragment StoreEntitySet="t_TipoSexo">
+                <ScalarProperty Name="IdTipoSexo" ColumnName="IdTipoSexo" />
+                <ScalarProperty Name="NombreTipoSexo" ColumnName="NombreTipoSexo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_UsuarioLogin">
+            <EntityTypeMapping TypeName="PUNTO_ENCUENTRO_Modelo.t_UsuarioLogin">
+              <MappingFragment StoreEntitySet="t_UsuarioLogin">
+                <ScalarProperty Name="UsuarioLogin" ColumnName="UsuarioLogin" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="IdNumUsuario" ColumnName="IdNumUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Usuarios">
+            <EntityTypeMapping TypeName="PUNTO_ENCUENTRO_Modelo.t_Usuarios">
+              <MappingFragment StoreEntitySet="t_Usuarios">
+                <ScalarProperty Name="numIdUsuario" ColumnName="numIdUsuario" />
+                <ScalarProperty Name="tipoIdNumUsuario" ColumnName="tipoIdNumUsuario" />
+                <ScalarProperty Name="primerNombre" ColumnName="primerNombre" />
+                <ScalarProperty Name="segundoNombre" ColumnName="segundoNombre" />
+                <ScalarProperty Name="primerApellido" ColumnName="primerApellido" />
+                <ScalarProperty Name="segundoApellido" ColumnName="segundoApellido" />
+                <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="NumeroFijo" ColumnName="NumeroFijo" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="Ocupacion" ColumnName="Ocupacion" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
