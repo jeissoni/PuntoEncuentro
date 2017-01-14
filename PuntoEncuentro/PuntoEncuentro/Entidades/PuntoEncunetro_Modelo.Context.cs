@@ -29,5 +29,6 @@ namespace PuntoEncuentro.Entidades
         public virtual DbSet<t_TipoSexo> t_TipoSexo { get; set; }
         public virtual DbSet<t_UsuarioLogin> t_UsuarioLogin { get; set; }
         public virtual DbSet<t_Usuarios> t_Usuarios { get; set; }
+        public virtual DbSet<t_TipoUsuario> t_TipoUsuario { get; set; }
     }
 }

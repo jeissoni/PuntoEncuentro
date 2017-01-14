@@ -76,6 +76,7 @@ namespace PuntoEncuentro.Controllers
 
             ViewBag.EstadoCivil = new SelectList(db.t_EstadoCivil, "IdEstadoCivil", "NombreEstadoCivil", t_Usuarios.EstadoCivil);
             ViewBag.Sexo = new SelectList(db.t_TipoSexo, "IdTipoSexo", "NombreTipoSexo", t_Usuarios.Sexo);
+            ViewBag.tipoUsuario = new SelectList(db.t_TipoUsuario, "Id", "Nombre", t_Usuarios.tipoUsuario);
             return View(t_Usuarios);
         }
 
@@ -93,6 +94,7 @@ namespace PuntoEncuentro.Controllers
             }
             ViewBag.EstadoCivil = new SelectList(db.t_EstadoCivil, "IdEstadoCivil", "NombreEstadoCivil", t_Usuarios.EstadoCivil);
             ViewBag.Sexo = new SelectList(db.t_TipoSexo, "IdTipoSexo", "NombreTipoSexo", t_Usuarios.Sexo);
+            ViewBag.tipoUsuario = new SelectList(db.t_TipoUsuario, "Id", "Nombre", t_Usuarios.tipoUsuario);
             return View(t_Usuarios);
         }
 
@@ -111,6 +113,7 @@ namespace PuntoEncuentro.Controllers
             }
             ViewBag.EstadoCivil = new SelectList(db.t_EstadoCivil, "IdEstadoCivil", "NombreEstadoCivil", t_Usuarios.EstadoCivil);
             ViewBag.Sexo = new SelectList(db.t_TipoSexo, "IdTipoSexo", "NombreTipoSexo", t_Usuarios.Sexo);
+            ViewBag.tipoUsuario = new SelectList(db.t_TipoUsuario, "Id","Nombre",t_Usuarios.tipoUsuario);
             return View(t_Usuarios);
         }
 

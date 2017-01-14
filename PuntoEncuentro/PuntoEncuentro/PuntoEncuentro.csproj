@@ -208,6 +208,9 @@
     <Compile Include="Entidades\t_TipoSexo.cs">
       <DependentUpon>PuntoEncunetro_Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\t_TipoUsuario.cs">
+      <DependentUpon>PuntoEncunetro_Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\t_UsuarioLogin.cs">
       <DependentUpon>PuntoEncunetro_Modelo.tt</DependentUpon>
     </Compile>

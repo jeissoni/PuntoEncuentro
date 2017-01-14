@@ -7,6 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Threading;
+
 namespace PuntoEncuentro.Entidades
 {
     using System;
@@ -27,7 +31,11 @@ namespace PuntoEncuentro.Entidades
         public string primerApellido { get; set; }
         public string segundoApellido { get; set; }
         public Nullable<int> tipoUsuario { get; set; }
-        public Nullable<System.DateTime> fechaNacimiento { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        
+        public DateTime? fechaNacimiento { get; set; }
+
         public string Celular { get; set; }
         public string NumeroFijo { get; set; }
         public string CorreoElectronico { get; set; }
@@ -39,5 +47,6 @@ namespace PuntoEncuentro.Entidades
         public virtual t_TipoSexo t_TipoSexo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<t_UsuarioLogin> t_UsuarioLogin { get; set; }
+        public virtual t_TipoUsuario t_TipoUsuario { get; set; }
     }
 }
