@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<PuntoEncuentro.Entidades.t_Usuarios>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Usuario";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Nuevo", "Create")
 </p>
 <table id="usuarios" class="table">
     <thead>
@@ -132,7 +132,7 @@
                 @Html.DisplayFor(modelItem => item.segundoApellido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.tipoUsuario)
+                @Html.DisplayFor(modelItem => item.t_TipoUsuario.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.fechaNacimiento)

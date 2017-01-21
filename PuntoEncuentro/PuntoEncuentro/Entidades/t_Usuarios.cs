@@ -33,7 +33,6 @@ namespace PuntoEncuentro.Entidades
         public Nullable<int> tipoUsuario { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        
         public DateTime? fechaNacimiento { get; set; }
 
         public string Celular { get; set; }
