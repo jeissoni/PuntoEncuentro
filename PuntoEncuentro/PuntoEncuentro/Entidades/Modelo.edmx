@@ -4,13 +4,34 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PUNTO_ENCUENTRO_Modelo.Store" Provider="Npgsql" ProviderManifestToken="9.4.8" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PUNTO_ENCUENTRO_Modelo.Store" Provider="Npgsql" ProviderManifestToken="9.6.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="t_AsistenciaEvento">
+          <Key>
+            <PropertyRef Name="IdEvento" />
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdEvento" Type="int4" Nullable="false" />
+          <Property Name="IdUsuario" Type="int4" Nullable="false" />
+          <Property Name="FechaRegistro" Type="date" Nullable="false" />
+          <Property Name="IdUsuarioRegistra" Type="int4" Nullable="false" />
+        </EntityType>
         <EntityType Name="t_EstadoCivil">
           <Key>
             <PropertyRef Name="IdEstadoCivil" />
           </Key>
           <Property Name="IdEstadoCivil" Type="int4" Nullable="false" />
           <Property Name="NombreEstadoCivil" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_Evento">
+          <Key>
+            <PropertyRef Name="IdEvento" />
+          </Key>
+          <Property Name="IdEvento" Type="int4" Nullable="false" />
+          <Property Name="NombreEvento" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="HoraIncio" Type="time" Precision="6" Nullable="false" />
+          <Property Name="FechaFin" Type="date" Nullable="false" />
+          <Property Name="HoraFin" Type="time" Precision="6" Nullable="false" />
         </EntityType>
         <EntityType Name="t_TipoSexo">
           <Key>
@@ -65,6 +86,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_IdEvento">
+          <End Role="t_Evento" Type="Self.t_Evento" Multiplicity="1" />
+          <End Role="t_AsistenciaEvento" Type="Self.t_AsistenciaEvento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Evento">
+              <PropertyRef Name="IdEvento" />
+            </Principal>
+            <Dependent Role="t_AsistenciaEvento">
+              <PropertyRef Name="IdEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdUsuario">
+          <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="1" />
+          <End Role="t_AsistenciaEvento" Type="Self.t_AsistenciaEvento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Usuarios">
+              <PropertyRef Name="numIdUsuario" />
+            </Principal>
+            <Dependent Role="t_AsistenciaEvento">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdUsuarioCrea">
+          <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="1" />
+          <End Role="t_AsistenciaEvento" Type="Self.t_AsistenciaEvento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Usuarios">
+              <PropertyRef Name="numIdUsuario" />
+            </Principal>
+            <Dependent Role="t_AsistenciaEvento">
+              <PropertyRef Name="IdUsuarioRegistra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_TipoSexo">
           <End Role="t_TipoSexo" Type="Self.t_TipoSexo" Multiplicity="0..1" />
           <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="*" />
@@ -102,7 +159,9 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PUNTO_ENCUENTRO_ModeloStoreContainer">
+          <EntitySet Name="t_AsistenciaEvento" EntityType="Self.t_AsistenciaEvento" Schema="public" store:Type="Tables" />
           <EntitySet Name="t_EstadoCivil" EntityType="Self.t_EstadoCivil" Schema="public" store:Type="Tables" />
+          <EntitySet Name="t_Evento" EntityType="Self.t_Evento" Schema="public" store:Type="Tables" />
           <EntitySet Name="t_TipoSexo" EntityType="Self.t_TipoSexo" Schema="public" store:Type="Tables" />
           <EntitySet Name="t_TipoUsuario" EntityType="Self.t_TipoUsuario" Schema="public" store:Type="Tables" />
           <EntitySet Name="t_UsuarioLogin" EntityType="Self.t_UsuarioLogin" Schema="public" store:Type="Tables" />
@@ -110,6 +169,18 @@
           <AssociationSet Name="fk_EstadoCivil" Association="Self.fk_EstadoCivil">
             <End Role="t_EstadoCivil" EntitySet="t_EstadoCivil" />
             <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdEvento" Association="Self.fk_IdEvento">
+            <End Role="t_Evento" EntitySet="t_Evento" />
+            <End Role="t_AsistenciaEvento" EntitySet="t_AsistenciaEvento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdUsuario" Association="Self.fk_IdUsuario">
+            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+            <End Role="t_AsistenciaEvento" EntitySet="t_AsistenciaEvento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdUsuarioCrea" Association="Self.fk_IdUsuarioCrea">
+            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+            <End Role="t_AsistenciaEvento" EntitySet="t_AsistenciaEvento" />
           </AssociationSet>
           <AssociationSet Name="fk_TipoSexo" Association="Self.fk_TipoSexo">
             <End Role="t_TipoSexo" EntitySet="t_TipoSexo" />
@@ -124,10 +195,24 @@
             <End Role="t_UsuarioLogin" EntitySet="t_UsuarioLogin" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PUNTO_ENCUENTRO_Modelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="t_AsistenciaEvento">
+          <Key>
+            <PropertyRef Name="IdEvento" />
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdEvento" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="IdUsuarioRegistra" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="t_Evento" Relationship="Self.fk_IdEvento" FromRole="t_AsistenciaEvento" ToRole="t_Evento" />
+          <NavigationProperty Name="t_Usuarios" Relationship="Self.fk_IdUsuario" FromRole="t_AsistenciaEvento" ToRole="t_Usuarios" />
+          <NavigationProperty Name="t_Usuarios1" Relationship="Self.fk_IdUsuarioCrea" FromRole="t_AsistenciaEvento" ToRole="t_Usuarios" />
+        </EntityType>
         <EntityType Name="t_EstadoCivil">
           <Key>
             <PropertyRef Name="IdEstadoCivil" />
@@ -136,6 +221,18 @@
           <Property Name="NombreEstadoCivil" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="t_Usuarios" Relationship="Self.fk_EstadoCivil" FromRole="t_EstadoCivil" ToRole="t_Usuarios" />
         </EntityType>
+        <EntityType Name="t_Evento">
+          <Key>
+            <PropertyRef Name="IdEvento" />
+          </Key>
+          <Property Name="IdEvento" Type="Int32" Nullable="false" />
+          <Property Name="NombreEvento" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="HoraIncio" Type="Time" Precision="6" Nullable="false" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="HoraFin" Type="Time" Precision="6" Nullable="false" />
+          <NavigationProperty Name="t_AsistenciaEvento" Relationship="Self.fk_IdEvento" FromRole="t_Evento" ToRole="t_AsistenciaEvento" />
+        </EntityType>
         <EntityType Name="t_TipoSexo">
           <Key>
             <PropertyRef Name="IdTipoSexo" />
@@ -143,6 +240,14 @@
           <Property Name="IdTipoSexo" Type="Int32" Nullable="false" />
           <Property Name="NombreTipoSexo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="t_Usuarios" Relationship="Self.fk_TipoSexo" FromRole="t_TipoSexo" ToRole="t_Usuarios" />
+        </EntityType>
+        <EntityType Name="t_TipoUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="t_Usuarios" Relationship="Self.fk_TipoUsuario" FromRole="t_TipoUsuario" ToRole="t_Usuarios" />
         </EntityType>
         <EntityType Name="t_UsuarioLogin">
           <Key>
@@ -171,11 +276,49 @@
           <Property Name="Ocupacion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Sexo" Type="Int32" />
           <Property Name="EstadoCivil" Type="Int32" />
+          <NavigationProperty Name="t_AsistenciaEvento" Relationship="Self.fk_IdUsuario" FromRole="t_Usuarios" ToRole="t_AsistenciaEvento" />
+          <NavigationProperty Name="t_AsistenciaEvento1" Relationship="Self.fk_IdUsuarioCrea" FromRole="t_Usuarios" ToRole="t_AsistenciaEvento" />
           <NavigationProperty Name="t_EstadoCivil" Relationship="Self.fk_EstadoCivil" FromRole="t_Usuarios" ToRole="t_EstadoCivil" />
           <NavigationProperty Name="t_TipoSexo" Relationship="Self.fk_TipoSexo" FromRole="t_Usuarios" ToRole="t_TipoSexo" />
+          <NavigationProperty Name="t_TipoUsuario" Relationship="Self.fk_TipoUsuario" FromRole="t_Usuarios" ToRole="t_TipoUsuario" />
           <NavigationProperty Name="t_UsuarioLogin" Relationship="Self.fk_Usuario" FromRole="t_Usuarios" ToRole="t_UsuarioLogin" />
-          <NavigationProperty Name="t_TipoUsuario" Relationship="PUNTO_ENCUENTRO_Modelo.fk_TipoUsuario" FromRole="t_Usuarios" ToRole="t_TipoUsuario" />
         </EntityType>
+        <Association Name="fk_IdEvento">
+          <End Role="t_Evento" Type="Self.t_Evento" Multiplicity="1" />
+          <End Role="t_AsistenciaEvento" Type="Self.t_AsistenciaEvento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Evento">
+              <PropertyRef Name="IdEvento" />
+            </Principal>
+            <Dependent Role="t_AsistenciaEvento">
+              <PropertyRef Name="IdEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdUsuario">
+          <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="1" />
+          <End Role="t_AsistenciaEvento" Type="Self.t_AsistenciaEvento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Usuarios">
+              <PropertyRef Name="numIdUsuario" />
+            </Principal>
+            <Dependent Role="t_AsistenciaEvento">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdUsuarioCrea">
+          <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="1" />
+          <End Role="t_AsistenciaEvento" Type="Self.t_AsistenciaEvento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Usuarios">
+              <PropertyRef Name="numIdUsuario" />
+            </Principal>
+            <Dependent Role="t_AsistenciaEvento">
+              <PropertyRef Name="IdUsuarioRegistra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_EstadoCivil">
           <End Role="t_EstadoCivil" Type="Self.t_EstadoCivil" Multiplicity="0..1" />
           <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="*" />
@@ -200,6 +343,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_TipoUsuario">
+          <End Role="t_TipoUsuario" Type="Self.t_TipoUsuario" Multiplicity="0..1" />
+          <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_TipoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_Usuarios">
+              <PropertyRef Name="tipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Usuario">
           <End Role="t_Usuarios" Type="Self.t_Usuarios" Multiplicity="0..1" />
           <End Role="t_UsuarioLogin" Type="Self.t_UsuarioLogin" Multiplicity="*" />
@@ -213,10 +368,25 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="PUNTO_ENCUENTRO_Entidades" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_AsistenciaEvento" EntityType="Self.t_AsistenciaEvento" />
           <EntitySet Name="t_EstadoCivil" EntityType="Self.t_EstadoCivil" />
+          <EntitySet Name="t_Evento" EntityType="Self.t_Evento" />
           <EntitySet Name="t_TipoSexo" EntityType="Self.t_TipoSexo" />
+          <EntitySet Name="t_TipoUsuario" EntityType="Self.t_TipoUsuario" />
           <EntitySet Name="t_UsuarioLogin" EntityType="Self.t_UsuarioLogin" />
           <EntitySet Name="t_Usuarios" EntityType="Self.t_Usuarios" />
+          <AssociationSet Name="fk_IdEvento" Association="Self.fk_IdEvento">
+            <End Role="t_Evento" EntitySet="t_Evento" />
+            <End Role="t_AsistenciaEvento" EntitySet="t_AsistenciaEvento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdUsuario" Association="Self.fk_IdUsuario">
+            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+            <End Role="t_AsistenciaEvento" EntitySet="t_AsistenciaEvento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdUsuarioCrea" Association="Self.fk_IdUsuarioCrea">
+            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+            <End Role="t_AsistenciaEvento" EntitySet="t_AsistenciaEvento" />
+          </AssociationSet>
           <AssociationSet Name="fk_EstadoCivil" Association="Self.fk_EstadoCivil">
             <End Role="t_EstadoCivil" EntitySet="t_EstadoCivil" />
             <End Role="t_Usuarios" EntitySet="t_Usuarios" />
@@ -225,42 +395,31 @@
             <End Role="t_TipoSexo" EntitySet="t_TipoSexo" />
             <End Role="t_Usuarios" EntitySet="t_Usuarios" />
           </AssociationSet>
+          <AssociationSet Name="fk_TipoUsuario" Association="Self.fk_TipoUsuario">
+            <End Role="t_TipoUsuario" EntitySet="t_TipoUsuario" />
+            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
+          </AssociationSet>
           <AssociationSet Name="fk_Usuario" Association="Self.fk_Usuario">
             <End Role="t_Usuarios" EntitySet="t_Usuarios" />
             <End Role="t_UsuarioLogin" EntitySet="t_UsuarioLogin" />
           </AssociationSet>
-          <EntitySet Name="t_TipoUsuario" EntityType="PUNTO_ENCUENTRO_Modelo.t_TipoUsuario" />
-          <AssociationSet Name="fk_TipoUsuario" Association="PUNTO_ENCUENTRO_Modelo.fk_TipoUsuario">
-            <End Role="t_TipoUsuario" EntitySet="t_TipoUsuario" />
-            <End Role="t_Usuarios" EntitySet="t_Usuarios" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="t_TipoUsuario">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="t_Usuarios" Relationship="PUNTO_ENCUENTRO_Modelo.fk_TipoUsuario" FromRole="t_TipoUsuario" ToRole="t_Usuarios" />
-        </EntityType>
-        <Association Name="fk_TipoUsuario">
-          <End Type="PUNTO_ENCUENTRO_Modelo.t_TipoUsuario" Role="t_TipoUsuario" Multiplicity="0..1" />
-          <End Type="PUNTO_ENCUENTRO_Modelo.t_Usuarios" Role="t_Usuarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="t_TipoUsuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="t_Usuarios">
-              <PropertyRef Name="tipoUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PUNTO_ENCUENTRO_ModeloStoreContainer" CdmEntityContainer="PUNTO_ENCUENTRO_Entidades">
+          <EntitySetMapping Name="t_AsistenciaEvento">
+            <EntityTypeMapping TypeName="PUNTO_ENCUENTRO_Modelo.t_AsistenciaEvento">
+              <MappingFragment StoreEntitySet="t_AsistenciaEvento">
+                <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="IdUsuarioRegistra" ColumnName="IdUsuarioRegistra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="t_EstadoCivil">
             <EntityTypeMapping TypeName="PUNTO_ENCUENTRO_Modelo.t_EstadoCivil">
               <MappingFragment StoreEntitySet="t_EstadoCivil">
@@ -269,11 +428,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="t_Evento">
+            <EntityTypeMapping TypeName="PUNTO_ENCUENTRO_Modelo.t_Evento">
+              <MappingFragment StoreEntitySet="t_Evento">
+                <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+                <ScalarProperty Name="NombreEvento" ColumnName="NombreEvento" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="HoraIncio" ColumnName="HoraIncio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="t_TipoSexo">
             <EntityTypeMapping TypeName="PUNTO_ENCUENTRO_Modelo.t_TipoSexo">
               <MappingFragment StoreEntitySet="t_TipoSexo">
                 <ScalarProperty Name="IdTipoSexo" ColumnName="IdTipoSexo" />
                 <ScalarProperty Name="NombreTipoSexo" ColumnName="NombreTipoSexo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_TipoUsuario">
+            <EntityTypeMapping TypeName="PUNTO_ENCUENTRO_Modelo.t_TipoUsuario">
+              <MappingFragment StoreEntitySet="t_TipoUsuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -303,14 +482,6 @@
                 <ScalarProperty Name="Ocupacion" ColumnName="Ocupacion" />
                 <ScalarProperty Name="Sexo" ColumnName="Sexo" />
                 <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="t_TipoUsuario">
-            <EntityTypeMapping TypeName="PUNTO_ENCUENTRO_Modelo.t_TipoUsuario">
-              <MappingFragment StoreEntitySet="t_TipoUsuario">
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

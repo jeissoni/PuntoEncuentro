@@ -1,0 +1,52 @@
+﻿@model IEnumerable<PuntoEncuentro.Entidades.t_AsistenciaEvento>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_Evento.NombreEvento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_Usuarios.tipoIdNumUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_Usuarios1.tipoIdNumUsuario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaRegistro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_Evento.NombreEvento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_Usuarios.tipoIdNumUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.t_Usuarios1.tipoIdNumUsuario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

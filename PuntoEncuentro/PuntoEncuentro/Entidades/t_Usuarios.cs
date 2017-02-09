@@ -7,10 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using System.Threading;
-
 namespace PuntoEncuentro.Entidades
 {
     using System;
@@ -21,6 +17,8 @@ namespace PuntoEncuentro.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public t_Usuarios()
         {
+            this.t_AsistenciaEvento = new HashSet<t_AsistenciaEvento>();
+            this.t_AsistenciaEvento1 = new HashSet<t_AsistenciaEvento>();
             this.t_UsuarioLogin = new HashSet<t_UsuarioLogin>();
         }
     
@@ -31,11 +29,7 @@ namespace PuntoEncuentro.Entidades
         public string primerApellido { get; set; }
         public string segundoApellido { get; set; }
         public Nullable<int> tipoUsuario { get; set; }
-
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        
-        public DateTime? fechaNacimiento { get; set; }
-
+        public Nullable<System.DateTime> fechaNacimiento { get; set; }
         public string Celular { get; set; }
         public string NumeroFijo { get; set; }
         public string CorreoElectronico { get; set; }
@@ -43,10 +37,14 @@ namespace PuntoEncuentro.Entidades
         public Nullable<int> Sexo { get; set; }
         public Nullable<int> EstadoCivil { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<t_AsistenciaEvento> t_AsistenciaEvento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<t_AsistenciaEvento> t_AsistenciaEvento1 { get; set; }
         public virtual t_EstadoCivil t_EstadoCivil { get; set; }
         public virtual t_TipoSexo t_TipoSexo { get; set; }
+        public virtual t_TipoUsuario t_TipoUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<t_UsuarioLogin> t_UsuarioLogin { get; set; }
-        public virtual t_TipoUsuario t_TipoUsuario { get; set; }
     }
 }

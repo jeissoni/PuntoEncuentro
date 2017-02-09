@@ -183,39 +183,47 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AsistenciaEventoController.cs" />
+    <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
-    <Compile Include="Entidades\PuntoEncunetro_Modelo.Context.cs">
+    <Compile Include="Entidades\Modelo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PuntoEncunetro_Modelo.Context.tt</DependentUpon>
+      <DependentUpon>Modelo.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entidades\PuntoEncunetro_Modelo.cs">
+    <Compile Include="Entidades\Modelo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PuntoEncunetro_Modelo.tt</DependentUpon>
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entidades\PuntoEncunetro_Modelo.Designer.cs">
+    <Compile Include="Entidades\Modelo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PuntoEncunetro_Modelo.edmx</DependentUpon>
+      <DependentUpon>Modelo.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\t_AsistenciaEvento.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\t_EstadoCivil.cs">
-      <DependentUpon>PuntoEncunetro_Modelo.tt</DependentUpon>
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\t_Evento.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\t_TipoSexo.cs">
-      <DependentUpon>PuntoEncunetro_Modelo.tt</DependentUpon>
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\t_TipoUsuario.cs">
-      <DependentUpon>PuntoEncunetro_Modelo.tt</DependentUpon>
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\t_UsuarioLogin.cs">
-      <DependentUpon>PuntoEncunetro_Modelo.tt</DependentUpon>
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Entidades\t_Usuarios.cs">
-      <DependentUpon>PuntoEncunetro_Modelo.tt</DependentUpon>
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -383,15 +391,15 @@
     <Content Include="Content\Morris\morris.css" />
     <Content Include="Content\sb-admin\sb-admin.css" />
     <Content Include="Content\sb-admin\style.css" />
-    <Content Include="Entidades\PuntoEncunetro_Modelo.Context.tt">
+    <Content Include="Entidades\Modelo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PuntoEncunetro_Modelo.edmx</DependentUpon>
-      <LastGenOutput>PuntoEncunetro_Modelo.Context.cs</LastGenOutput>
+      <DependentUpon>Modelo.edmx</DependentUpon>
+      <LastGenOutput>Modelo.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Entidades\PuntoEncunetro_Modelo.tt">
+    <Content Include="Entidades\Modelo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PuntoEncunetro_Modelo.edmx</DependentUpon>
-      <LastGenOutput>PuntoEncunetro_Modelo.cs</LastGenOutput>
+      <DependentUpon>Modelo.edmx</DependentUpon>
+      <LastGenOutput>Modelo.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -408,18 +416,18 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
-    <EntityDeploy Include="Entidades\PuntoEncunetro_Modelo.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PuntoEncunetro_Modelo.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Entidades\PuntoEncunetro_Modelo.edmx.diagram">
-      <DependentUpon>PuntoEncunetro_Modelo.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
+    <EntityDeploy Include="Entidades\Modelo.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Modelo.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Entidades\Modelo.edmx.diagram">
+      <DependentUpon>Modelo.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -556,9 +564,20 @@
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Evento\Create.cshtml" />
+    <Content Include="Views\Evento\Delete.cshtml" />
+    <Content Include="Views\Evento\Details.cshtml" />
+    <Content Include="Views\Evento\Edit.cshtml" />
+    <Content Include="Views\Evento\Index.cshtml" />
+    <Content Include="Views\AsistenciaEvento\Create.cshtml" />
+    <Content Include="Views\AsistenciaEvento\Delete.cshtml" />
+    <Content Include="Views\AsistenciaEvento\Details.cshtml" />
+    <Content Include="Views\AsistenciaEvento\Edit.cshtml" />
+    <Content Include="Views\AsistenciaEvento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Imagen\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

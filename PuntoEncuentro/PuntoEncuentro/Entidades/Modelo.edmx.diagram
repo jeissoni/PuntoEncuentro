@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="783c30f1ba6a40ac80f5d83992e72784" Name="Diagram1">
+        <EntityTypeShape EntityType="PUNTO_ENCUENTRO_Modelo.t_AsistenciaEvento" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PUNTO_ENCUENTRO_Modelo.t_EstadoCivil" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PUNTO_ENCUENTRO_Modelo.t_Evento" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PUNTO_ENCUENTRO_Modelo.t_TipoSexo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PUNTO_ENCUENTRO_Modelo.t_TipoUsuario" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PUNTO_ENCUENTRO_Modelo.t_UsuarioLogin" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="PUNTO_ENCUENTRO_Modelo.t_Usuarios" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="PUNTO_ENCUENTRO_Modelo.fk_IdEvento" ManuallyRouted="false" />
+        <AssociationConnector Association="PUNTO_ENCUENTRO_Modelo.fk_IdUsuario" ManuallyRouted="false" />
+        <AssociationConnector Association="PUNTO_ENCUENTRO_Modelo.fk_IdUsuarioCrea" ManuallyRouted="false" />
+        <AssociationConnector Association="PUNTO_ENCUENTRO_Modelo.fk_EstadoCivil" ManuallyRouted="false" />
+        <AssociationConnector Association="PUNTO_ENCUENTRO_Modelo.fk_TipoSexo" ManuallyRouted="false" />
+        <AssociationConnector Association="PUNTO_ENCUENTRO_Modelo.fk_TipoUsuario" ManuallyRouted="false" />
+        <AssociationConnector Association="PUNTO_ENCUENTRO_Modelo.fk_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

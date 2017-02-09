@@ -13,7 +13,7 @@ namespace PuntoEncuentro.Controllers
 {
     public class UsuariosController : Controller
     {
-        private PUNTO_ENCUENTRO_Entidades db = new PUNTO_ENCUENTRO_Entidades();
+        private  PUNTO_ENCUENTRO_Entidades db = new PUNTO_ENCUENTRO_Entidades();
 
         // GET: Usuarios
         public async Task<ActionResult> Index()
