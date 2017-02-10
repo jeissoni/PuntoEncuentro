@@ -230,6 +230,7 @@
     </Compile>
     <Compile Include="Helpers\Usuario.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AsistenciaEventoModelo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginModelo.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
