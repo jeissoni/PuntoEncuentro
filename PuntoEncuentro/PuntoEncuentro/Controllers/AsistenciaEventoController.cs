@@ -56,6 +56,19 @@ namespace PuntoEncuentro.Controllers
             return View(asistencia);
         }
 
+        public void RegistrarAsistencia(int evento, int usu, int usuCrea)
+        {
+            var asistenciaObj = new t_AsistenciaEvento()
+            {
+                FechaRegistro = DateTime.Now,
+                IdEvento = evento,
+                IdUsuario = usu,
+                IdUsuarioRegistra = usuCrea
+            };
+            db.t_AsistenciaEvento.Add(asistenciaObj);
+            db.SaveChanges();
+        }
+
         // POST: AsistenciaEvento/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.

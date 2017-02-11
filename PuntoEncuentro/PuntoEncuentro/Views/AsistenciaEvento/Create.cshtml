@@ -9,46 +9,149 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>t_AsistenciaEvento</h4>
+        <h4>Asistencia Evento</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @*@Html.LabelFor(model => model.ListaEventos, "IdEvento", htmlAttributes: new { @class = "control-label col-md-2" })*@
             @Html.Label("Nombre Evento", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(x=>x.ListaEventos, new SelectList(Model.ListaEventos, "IdEvento", "NombreEvento"), new { @class = "form-control" })
+                @Html.DropDownListFor(x => x.ListaEventos, new SelectList(Model.ListaEventos, "IdEvento", "NombreEvento"), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ListaEventos, "", new { @class = "text-danger" })
             </div>
+        @*</div>
+
+        <div class="form-group">*@
+            @Html.Label("Registrar Personsas Eventos", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+                <table id="usuarios" class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Primer Nombre
+                            </th>
+                            <th>
+                                Segundo Nombre
+                            </th>
+                            <th>
+
+                                Primer Apellido
+                            </th>
+                            <th>
+                                Segundo Apellido
+                            </th>
+                            <th>
+                                Celular
+                            </th>
+                            <th>
+                                Número Fijo
+                            </th>
+                            <th>
+                                Correo Electronico
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                Primer Nombre
+                            </th>
+                            <th>
+                                Segundo Nombre
+                            </th>
+                            <th>
+
+                                Primer Apellido
+                            </th>
+                            <th>
+                                Segundo Apellido
+                            </th>
+                            <th>
+                                Celular
+                            </th>
+                            <th>
+                                Número Fijo
+                            </th>
+                            <th>
+                                Correo Electronico
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model.ListaUsuarios)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.primerNombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.segundoNombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.primerApellido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.segundoApellido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Celular)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NumeroFijo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CorreoElectronico)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Registrar", "RegistrarAsistencia", new { usu = item.numIdUsuario, usuCrea = 1, evento = 1 }) 
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <script type="text/javascript" charset="utf8">
+                    $(document).ready(function () {
+                        $('#usuarios').DataTable();
+                    });
+                </script>
+
+            </div>
         </div>
+
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.IdUsuario, "IdUsuario", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdUsuario", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.IdUsuario, "IdUsuario", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("IdUsuario", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FechaRegistro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaRegistro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FechaRegistro, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.FechaRegistro, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FechaRegistro, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FechaRegistro, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdUsuarioRegistra, "IdUsuarioRegistra", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdUsuarioRegistra", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdUsuarioRegistra, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdUsuarioRegistra, "IdUsuarioRegistra", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("IdUsuarioRegistra", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdUsuarioRegistra, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
