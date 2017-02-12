@@ -1,5 +1,5 @@
-﻿@*@model PuntoEncuentro.Entidades.t_AsistenciaEvento*@
-@model PuntoEncuentro.Models.AsistenciaEventoModelo
+﻿@using PuntoEncuentro.Entidades
+@model PuntoEncuentro.Entidades.t_AsistenciaEvento
 
 @{
     ViewBag.Title = "Create";
@@ -14,19 +14,20 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Asistencia Evento</h4>
+        <h4>t_AsistenciaEvento</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @*@Html.LabelFor(model => model.ListaEventos, "IdEvento", htmlAttributes: new { @class = "control-label col-md-2" })*@
-            @Html.Label("Nombre Evento", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IdEvento, "IdEvento", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(x => x.ListaEventos, new SelectList(Model.ListaEventos, "IdEvento", "NombreEvento"), new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ListaEventos, "", new { @class = "text-danger" })
+                @Html.DropDownList("IdEvento", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdEvento, "", new { @class = "text-danger" })
             </div>
-        @*</div>
+        </div>
 
-        <div class="form-group">*@
+
+
+        <div class="form-group">
             @Html.Label("Registrar Personsas Eventos", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <p>
@@ -57,6 +58,9 @@
                             <th>
                                 Correo Electronico
                             </th>
+                            <th>
+                                Acción
+                            </th>
 
                         </tr>
                     </thead>
@@ -84,10 +88,13 @@
                             <th>
                                 Correo Electronico
                             </th>
+                            <th>
+                                Acción
+                            </th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var item in Model.ListaUsuarios)
+                        @foreach (var item in (List<t_Usuarios>)ViewData["Usuario"])
                         {
                             <tr>
                                 <td>
@@ -112,7 +119,10 @@
                                     @Html.DisplayFor(modelItem => item.CorreoElectronico)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Registrar", "RegistrarAsistencia", new { usu = item.numIdUsuario, usuCrea = 1, evento = 1 }) 
+                                    @Html.ActionLink("AsistenciaEvento", "Create", new { usu = item.numIdUsuario, usuCrea = 1, evento = 1 })
+
+
+                                    @*<button onclick="location.href='@Url.Action("RegistrarAsistencia", "AsistenciaEvento", new { usu = item.numIdUsuario, usuCrea = 1, evento = 1 })'"></button>*@
 
                                 </td>
                             </tr>
@@ -126,8 +136,9 @@
                 </script>
 
             </div>
-        </div>
 
+
+        </div>
 
         @*<div class="form-group">
                 @Html.LabelFor(model => model.IdUsuario, "IdUsuario", htmlAttributes: new { @class = "control-label col-md-2" })

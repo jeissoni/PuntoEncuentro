@@ -230,10 +230,11 @@
     </Compile>
     <Compile Include="Helpers\Usuario.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AsistenciaEventoModelo.cs" />
+    <Compile Include="Models\ListaAsistenciaEventoModelo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginModelo.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RegistrarPersonasEvento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

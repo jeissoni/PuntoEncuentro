@@ -8,7 +8,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PuntoEncuentro.Entidades;
-using PuntoEncuentro.Models;
 
 namespace PuntoEncuentro.Controllers
 {
@@ -16,13 +15,11 @@ namespace PuntoEncuentro.Controllers
     {
         private PUNTO_ENCUENTRO_Entidades db = new PUNTO_ENCUENTRO_Entidades();
 
-
         // GET: AsistenciaEvento
         public async Task<ActionResult> Index()
         {
             var t_AsistenciaEvento = db.t_AsistenciaEvento.Include(t => t.t_Evento).Include(t => t.t_Usuarios).Include(t => t.t_Usuarios1);
             return View(await t_AsistenciaEvento.ToListAsync());
-
         }
 
         // GET: AsistenciaEvento/Details/5
@@ -43,30 +40,11 @@ namespace PuntoEncuentro.Controllers
         // GET: AsistenciaEvento/Create
         public ActionResult Create()
         {
-            //ViewBag.IdEvento = new SelectList(db.t_Evento, "IdEvento", "NombreEvento");
+            ViewBag.IdEvento = new SelectList(db.t_Evento, "IdEvento", "NombreEvento");
+            ViewBag.Usuario = db.t_Usuarios.ToList();
             //ViewBag.IdUsuario = new SelectList(db.t_Usuarios, "numIdUsuario", "tipoIdNumUsuario");
             //ViewBag.IdUsuarioRegistra = new SelectList(db.t_Usuarios, "numIdUsuario", "tipoIdNumUsuario");
-            //return View();
-            AsistenciaEventoModelo asistencia = new AsistenciaEventoModelo
-            {
-                ListaEventos = db.t_Evento.ToList(),
-                ListaUsuarios = db.t_Usuarios.ToList()
-            };
-
-            return View(asistencia);
-        }
-
-        public void RegistrarAsistencia(int evento, int usu, int usuCrea)
-        {
-            var asistenciaObj = new t_AsistenciaEvento()
-            {
-                FechaRegistro = DateTime.Now,
-                IdEvento = evento,
-                IdUsuario = usu,
-                IdUsuarioRegistra = usuCrea
-            };
-            db.t_AsistenciaEvento.Add(asistenciaObj);
-            db.SaveChanges();
+            return View();
         }
 
         // POST: AsistenciaEvento/Create
