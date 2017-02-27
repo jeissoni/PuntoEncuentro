@@ -33,6 +33,8 @@
                 <p>
                     @Html.ActionLink("Create New", "Create")
                 </p>
+            </div>
+            <div class="col-md-10">
                 <table id="usuarios" class="table">
                     <thead>
                         <tr>
@@ -119,8 +121,8 @@
                                     @Html.DisplayFor(modelItem => item.CorreoElectronico)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("AsistenciaEvento", "Create", new { usu = item.numIdUsuario, usuCrea = 1, evento = 1 })
-
+                                    @Html.ActionLink("AsistenciaEvento", "Registrar", new { usu = item.numIdUsuario, usuCrea = 1})
+                                  
 
                                     @*<button onclick="location.href='@Url.Action("RegistrarAsistencia", "AsistenciaEvento", new { usu = item.numIdUsuario, usuCrea = 1, evento = 1 })'"></button>*@
 
@@ -129,11 +131,34 @@
                         }
                     </tbody>
                 </table>
-                <script type="text/javascript" charset="utf8">
+                @*<script type="text/javascript" charset="utf8">
                     $(document).ready(function () {
                         $('#usuarios').DataTable();
                     });
-                </script>
+
+                    $('a').on('click', function (e) {
+                        var $a = $(this);
+                        var url = $a.prop('href').split("?")[0];
+
+                        console.log(url);
+                        // http://localhost/MiControlador/MiAccion/1
+
+                        var parametro = {
+                            tipo: $('#cmbTipo').val()
+                        };
+
+                        console.log($.param(parametro));
+                        // tipo=1
+
+                        console.log(url + "?" + $.param(parametro));
+                        // http://localhost/MiControlador/MiAccion/1?tipo=1
+
+                        //e.preventDefault();
+
+                        $a.prop('href', url + "?" + $.param(parametro));
+                    });
+                   
+                </script>*@
 
             </div>
 
@@ -178,4 +203,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Funciones.js"></script>
 }
