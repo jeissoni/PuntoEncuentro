@@ -1,4 +1,5 @@
 ﻿@using PuntoEncuentro.Entidades
+@using PuntoEncuentro.Helpers
 @model PuntoEncuentro.Entidades.t_AsistenciaEvento
 
 @{
@@ -6,201 +7,201 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
-
-@using (Html.BeginForm())
+@if ((Usuario)Session["Ususario"]!=null)
 {
-    @Html.AntiForgeryToken()
+    var usuarioClass = (Usuario) Session["Ususario"];
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>t_AsistenciaEvento</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdEvento, "IdEvento", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdEvento", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdEvento, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <h4>t_AsistenciaEvento</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdEvento, "IdEvento", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("IdEvento", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdEvento, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
 
 
-        <div class="form-group">
-            @Html.Label("Registrar Personsas Eventos", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <p>
-                    @Html.ActionLink("Create New", "Create")
-                </p>
-            </div>
-            <div class="col-md-10">
-                <table id="usuarios" class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                Primer Nombre
-                            </th>
-                            <th>
-                                Segundo Nombre
-                            </th>
-                            <th>
-
-                                Primer Apellido
-                            </th>
-                            <th>
-                                Segundo Apellido
-                            </th>
-                            <th>
-                                Celular
-                            </th>
-                            <th>
-                                Número Fijo
-                            </th>
-                            <th>
-                                Correo Electronico
-                            </th>
-                            <th>
-                                Acción
-                            </th>
-
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>
-                                Primer Nombre
-                            </th>
-                            <th>
-                                Segundo Nombre
-                            </th>
-                            <th>
-
-                                Primer Apellido
-                            </th>
-                            <th>
-                                Segundo Apellido
-                            </th>
-                            <th>
-                                Celular
-                            </th>
-                            <th>
-                                Número Fijo
-                            </th>
-                            <th>
-                                Correo Electronico
-                            </th>
-                            <th>
-                                Acción
-                            </th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach (var item in (List<t_Usuarios>)ViewData["Usuario"])
-                        {
+            <div class="form-group">
+                @Html.Label("Registrar Personsas Eventos", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <p>
+                        @Html.ActionLink("Create New", "Create")
+                    </p>
+                </div>
+                <div class="col-md-10">
+                    <table id="usuarios" class="table">
+                        <thead>
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.primerNombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.segundoNombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.primerApellido)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.segundoApellido)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Celular)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NumeroFijo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CorreoElectronico)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("AsistenciaEvento", "Registrar", new { usu = item.numIdUsuario, usuCrea = 1})
-                                  
+                                <th>
+                                    Primer Nombre
+                                </th>
+                                <th>
+                                    Segundo Nombre
+                                </th>
+                                <th>
 
-                                    @*<button onclick="location.href='@Url.Action("RegistrarAsistencia", "AsistenciaEvento", new { usu = item.numIdUsuario, usuCrea = 1, evento = 1 })'"></button>*@
+                                    Primer Apellido
+                                </th>
+                                <th>
+                                    Segundo Apellido
+                                </th>
+                                <th>
+                                    Celular
+                                </th>
+                                <th>
+                                    Número Fijo
+                                </th>
+                                <th>
+                                    Correo Electronico
+                                </th>
+                                <th>
+                                    Acción
+                                </th>
 
-                                </td>
                             </tr>
-                        }
-                    </tbody>
-                </table>
-                @*<script type="text/javascript" charset="utf8">
-                    $(document).ready(function () {
-                        $('#usuarios').DataTable();
-                    });
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>
+                                    Primer Nombre
+                                </th>
+                                <th>
+                                    Segundo Nombre
+                                </th>
+                                <th>
 
-                    $('a').on('click', function (e) {
-                        var $a = $(this);
-                        var url = $a.prop('href').split("?")[0];
+                                    Primer Apellido
+                                </th>
+                                <th>
+                                    Segundo Apellido
+                                </th>
+                                <th>
+                                    Celular
+                                </th>
+                                <th>
+                                    Número Fijo
+                                </th>
+                                <th>
+                                    Correo Electronico
+                                </th>
+                                <th>
+                                    Acción
+                                </th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var item in (List<t_Usuarios>)ViewData["Usuario"])
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.primerNombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.segundoNombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.primerApellido)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.segundoApellido)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Celular)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NumeroFijo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CorreoElectronico)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("AsistenciaEvento", "Registrar", new { item.numIdUsuario, usu = usuarioClass.IdUsuario })
 
-                        console.log(url);
-                        // http://localhost/MiControlador/MiAccion/1
 
-                        var parametro = {
-                            tipo: $('#cmbTipo').val()
-                        };
+                                        @*<button onclick="location.href='@Url.Action("RegistrarAsistencia", "AsistenciaEvento", new { usu = item.numIdUsuario, usuCrea = 1, evento = 1 })'"></button>*@
 
-                        console.log($.param(parametro));
-                        // tipo=1
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @*<script type="text/javascript" charset="utf8">
+                            $(document).ready(function () {
+                                $('#usuarios').DataTable();
+                            });
 
-                        console.log(url + "?" + $.param(parametro));
-                        // http://localhost/MiControlador/MiAccion/1?tipo=1
+                            $('a').on('click', function (e) {
+                                var $a = $(this);
+                                var url = $a.prop('href').split("?")[0];
 
-                        //e.preventDefault();
+                                console.log(url);
+                                // http://localhost/MiControlador/MiAccion/1
 
-                        $a.prop('href', url + "?" + $.param(parametro));
-                    });
-                   
-                </script>*@
+                                var parametro = {
+                                    tipo: $('#cmbTipo').val()
+                                };
 
-            </div>
+                                console.log($.param(parametro));
+                                // tipo=1
 
+                                console.log(url + "?" + $.param(parametro));
+                                // http://localhost/MiControlador/MiAccion/1?tipo=1
 
-        </div>
+                                //e.preventDefault();
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.IdUsuario, "IdUsuario", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("IdUsuario", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
+                                $a.prop('href', url + "?" + $.param(parametro));
+                            });
+
+                        </script>*@
+
                 </div>
+
+
             </div>
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.IdUsuario, "IdUsuario", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("IdUsuario", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FechaRegistro, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.FechaRegistro, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FechaRegistro, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdUsuarioRegistra, "IdUsuarioRegistra", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("IdUsuarioRegistra", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdUsuarioRegistra, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
 
             <div class="form-group">
-                @Html.LabelFor(model => model.FechaRegistro, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FechaRegistro, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FechaRegistro, "", new { @class = "text-danger" })
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
                 </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.IdUsuarioRegistra, "IdUsuarioRegistra", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("IdUsuarioRegistra", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.IdUsuarioRegistra, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/Funciones.js"></script>

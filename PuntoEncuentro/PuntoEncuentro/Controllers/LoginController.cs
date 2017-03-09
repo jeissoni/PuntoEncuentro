@@ -42,6 +42,7 @@ namespace PuntoEncuentro.Controllers
                     {
                         usuario.Nombre = consultaUsusrio[0].primerNombre;
                         usuario.Apellido = consultaUsusrio[0].primerApellido;
+                        usuario.IdUsuario = consultaUsusrio[0].numIdUsuario;
                         Session["Ususario"] = usuario;
                         return RedirectToAction("Index", "Usuarios");
 
