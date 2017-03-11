@@ -48,7 +48,7 @@ namespace PuntoEncuentro.Controllers
         }
 
 
-        public ActionResult Registrar(string evento, string usu, string usuCrea)
+        public ActionResult Registrar( string usu, string usuCrea, string evento)
         {
             var mire = evento;
             var otro1 = usu;

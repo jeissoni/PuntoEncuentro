@@ -9,16 +9,16 @@ $("a").on("click", function (e) {
     //console.log(url);
     // http://localhost/MiControlador/MiAccion/1
 
-
+    var evento="evento="+$("#IdEvento").val();
     var parametro = {
         evento:
             $("#IdEvento").val(),
-        usu: param.split("&")[0],
-        usuCrea: param.split("&")[1]
+        usu: param.split("&")[0].split("=")[1],
+        usuCrea: param.split("&")[1].split("=")[1]
     };
 
-    var mire = param.split("&");
-    var otro = "evento=" + $("#IdEvento").val() + "&" + param;
+    
+    var otro = param+"&"+evento;
     //console.log($.param(parametro));
     // tipo=1
 
@@ -27,5 +27,5 @@ $("a").on("click", function (e) {
 
     //e.preventDefault();
 
-    $a.prop("href", url + "?" + $.param(otro));
+    $a.prop("href", url + "?" + $.param(parametro));
 });
