@@ -5,63 +5,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Registrar Nuva Persona", "Create")
 </p>
 <table id="usuarios" class="table">
     <thead>
     <tr>
         <th>
-            @*@Html.DisplayNameFor(model => model.tipoIdNumUsuario)*@
-            Tipo Documento
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.primerNombre)*@
             Primer Nombre
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.segundoNombre)*@
             Segundo Nombre
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.primerApellido)*@
             Primer Apellido
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.segundoApellido)*@
             Segundo Apellido
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.tipoUsuario)*@
             Tipo de Usuario
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.fechaNacimiento)*@
             Fecha de Nacimiento
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.Celular)*@
             Celular
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.NumeroFijo)*@
             Número Fijo
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.CorreoElectronico)*@
             Correo Electronico
         </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.Ocupacion)*@
-            Ocupacion
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.t_EstadoCivil.NombreEstadoCivil)*@
-            Estado Civil
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.t_TipoSexo.NombreTipoSexo)*@
-            Sexo
-        </th>
+       
         <th>
             Operaciones
         </th>
@@ -69,9 +45,6 @@
     </thead>
     <tfoot>
         <tr>
-            <th>
-                Tipo Documento
-            </th>
             <th>
                 Primer Nombre
             </th>
@@ -99,15 +72,7 @@
             <th>
                 Correo Electronico
             </th>
-            <th>
-                Ocupacion
-            </th>
-            <th>
-                Estado Civil
-            </th>
-            <th>
-                Sexo
-            </th>
+           
             <th>
                 Operaciones
             </th>
@@ -116,9 +81,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.tipoIdNumUsuario)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.primerNombre)
             </td>
@@ -146,15 +108,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CorreoElectronico)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ocupacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.t_EstadoCivil.NombreEstadoCivil)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.t_TipoSexo.NombreTipoSexo)
-            </td>
+            
             <td>
                 @Html.ActionLink("Editar", "Edit", new {id = item.numIdUsuario}) |
                 @Html.ActionLink("Detalles", "Details", new {id = item.numIdUsuario}) |

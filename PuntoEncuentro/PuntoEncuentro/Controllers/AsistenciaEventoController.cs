@@ -47,13 +47,24 @@ namespace PuntoEncuentro.Controllers
             return View();
         }
 
-
-        public ActionResult Registrar( string usu, string usuCrea, string evento)
+        //[HttpPost] //
+        //[ValidateAntiForgeryToken] //
+        public async Task<ActionResult> Registrar( int usu, int usuCrea, int evento)
         {
-            var mire = evento;
-            var otro1 = usu;
-            var otro2 = usuCrea;
-            return null;
+
+            var llaveDuplicada =
+                db.t_AsistenciaEvento.FirstOrDefault(x => x.IdEvento == evento & x.IdUsuario == usu);
+            if (llaveDuplicada != null) return RedirectToAction("Create");
+            var insert = new t_AsistenciaEvento()
+            {
+                IdEvento = Convert.ToInt32(evento),
+                IdUsuario = Convert.ToInt32(usu),
+                IdUsuarioRegistra = Convert.ToInt32(usuCrea),
+                FechaRegistro = DateTime.Today.Date
+            };
+            db.t_AsistenciaEvento.Add(insert);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Create");
         }
 
         // POST: AsistenciaEvento/Create

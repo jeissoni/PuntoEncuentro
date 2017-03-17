@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
 namespace PuntoEncuentro.Entidades
 {
     using System;
@@ -29,6 +32,9 @@ namespace PuntoEncuentro.Entidades
         public string primerApellido { get; set; }
         public string segundoApellido { get; set; }
         public Nullable<int> tipoUsuario { get; set; }
+        
+        [DisplayName("Fecha de Nacimiento")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> fechaNacimiento { get; set; }
         public string Celular { get; set; }
         public string NumeroFijo { get; set; }
