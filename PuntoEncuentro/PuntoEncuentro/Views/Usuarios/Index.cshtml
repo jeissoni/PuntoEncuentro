@@ -94,7 +94,8 @@
                 @Html.DisplayFor(modelItem => item.segundoApellido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.tipoUsuario)
+                @*@Html.DisplayFor(modelItem => item.tipoUsuario)*@
+                @Html.DisplayFor(modelItem=>item.t_TipoUsuario.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.fechaNacimiento)

@@ -7,7 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace PuntoEncuentro.Entidades
@@ -26,22 +25,22 @@ namespace PuntoEncuentro.Entidades
         }
     
         public int numIdUsuario { get; set; }
-        public string tipoIdNumUsuario { get; set; }
         public string primerNombre { get; set; }
         public string segundoNombre { get; set; }
         public string primerApellido { get; set; }
         public string segundoApellido { get; set; }
         public Nullable<int> tipoUsuario { get; set; }
-        
-        [DisplayName("Fecha de Nacimiento")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> fechaNacimiento { get; set; }
+
         public string Celular { get; set; }
         public string NumeroFijo { get; set; }
         public string CorreoElectronico { get; set; }
         public string Ocupacion { get; set; }
         public Nullable<int> Sexo { get; set; }
         public Nullable<int> EstadoCivil { get; set; }
+        public Nullable<int> TipoDocumento { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<t_AsistenciaEvento> t_AsistenciaEvento { get; set; }
@@ -52,5 +51,6 @@ namespace PuntoEncuentro.Entidades
         public virtual t_TipoUsuario t_TipoUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<t_UsuarioLogin> t_UsuarioLogin { get; set; }
+        public virtual t_TipoDocumento t_TipoDocumento { get; set; }
     }
 }

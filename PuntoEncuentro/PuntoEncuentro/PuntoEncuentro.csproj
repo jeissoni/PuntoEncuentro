@@ -213,6 +213,9 @@
     <Compile Include="Entidades\t_Evento.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\t_TipoDocumento.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entidades\t_TipoSexo.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>

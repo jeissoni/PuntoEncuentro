@@ -19,6 +19,8 @@
         <AssociationConnector Association="PUNTO_ENCUENTRO_Modelo.fk_TipoSexo" ManuallyRouted="false" />
         <AssociationConnector Association="PUNTO_ENCUENTRO_Modelo.fk_TipoUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="PUNTO_ENCUENTRO_Modelo.fk_Usuario" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PUNTO_ENCUENTRO_Modelo.t_TipoDocumento" Width="1.5" PointX="5.375" PointY="0.875" />
+        <AssociationConnector Association="PUNTO_ENCUENTRO_Modelo.fk_TipoDocumento" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

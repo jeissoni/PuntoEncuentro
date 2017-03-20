@@ -32,5 +32,6 @@ namespace PuntoEncuentro.Entidades
         public virtual DbSet<t_TipoUsuario> t_TipoUsuario { get; set; }
         public virtual DbSet<t_UsuarioLogin> t_UsuarioLogin { get; set; }
         public virtual DbSet<t_Usuarios> t_Usuarios { get; set; }
+        public virtual DbSet<t_TipoDocumento> t_TipoDocumento { get; set; }
     }
 }

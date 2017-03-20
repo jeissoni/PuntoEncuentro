@@ -22,7 +22,7 @@ namespace PuntoEncuentro.Controllers
             {
                 if (!String.IsNullOrEmpty(Session["Ususario"].ToString()))
                 {
-                    var t_Usuarios = db.t_Usuarios.Include(t => t.t_EstadoCivil).Include(t => t.t_TipoSexo);
+                    var t_Usuarios = db.t_Usuarios.Include(t => t.t_EstadoCivil).Include(t => t.t_TipoSexo).Include(t=>t.t_TipoUsuario);
                     return View(await t_Usuarios.ToListAsync());
                 }
                 else
@@ -57,6 +57,7 @@ namespace PuntoEncuentro.Controllers
         {
             ViewBag.EstadoCivil = new SelectList(db.t_EstadoCivil, "IdEstadoCivil", "NombreEstadoCivil");
             ViewBag.Sexo = new SelectList(db.t_TipoSexo, "IdTipoSexo", "NombreTipoSexo");
+            ViewBag.TipoDocumento = new SelectList(db.t_TipoDocumento, "Id", "Nombre");
             return View();
         }
 
@@ -65,7 +66,7 @@ namespace PuntoEncuentro.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "numIdUsuario,tipoIdNumUsuario,primerNombre,segundoNombre,primerApellido,segundoApellido,tipoUsuario,fechaNacimiento,Celular,NumeroFijo,CorreoElectronico,Ocupacion,Sexo,EstadoCivil")] t_Usuarios t_Usuarios)
+        public async Task<ActionResult> Create([Bind(Include = "numIdUsuario,TipoDocumento,primerNombre,segundoNombre,primerApellido,segundoApellido,tipoUsuario,fechaNacimiento,Celular,NumeroFijo,CorreoElectronico,Ocupacion,Sexo,EstadoCivil")] t_Usuarios t_Usuarios)
         {
             if (ModelState.IsValid)
             {
