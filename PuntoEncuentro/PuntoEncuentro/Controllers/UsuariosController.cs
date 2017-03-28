@@ -104,11 +104,15 @@ namespace PuntoEncuentro.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "numIdUsuario,tipoIdNumUsuario,primerNombre,segundoNombre,primerApellido,segundoApellido,tipoUsuario,fechaNacimiento,Celular,NumeroFijo,CorreoElectronico,Ocupacion,Sexo,EstadoCivil")] t_Usuarios t_Usuarios)
+        public async Task<ActionResult> Edit([Bind(Include = "TipoDocumento,numIdUsuario,primerNombre,segundoNombre,primerApellido,segundoApellido,tipoUsuario,fechaNacimiento,Celular,NumeroFijo,CorreoElectronico,Ocupacion,Sexo,EstadoCivil")] t_Usuarios t_Usuarios)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(t_Usuarios).State = EntityState.Modified;
+                int idUsuarioViejo = Convert.ToInt32(Request["IdUsuarioViejo"]);
+                t_Usuarios usuarioBorrar = db.t_Usuarios.FirstOrDefault(x => x.numIdUsuario == idUsuarioViejo);
+                db.t_Usuarios.Remove(usuarioBorrar);
+                db.t_Usuarios.Add(t_Usuarios);
+                //db.Entry(t_Usuarios).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

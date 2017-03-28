@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-10">
                 @*@Html.DropDownList("TipoDocumento", null, htmlAttributes: new { @class = "form-control" })*@
-                @Html.DropDownListFor(model=>model.TipoDocumento, ViewData["TipoDocumento"] as IEnumerable<SelectListItem>)
+                @Html.DropDownListFor(model=>model.TipoDocumento, ViewData["TipoDocumento"] as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TipoDocumento, "", new { @class = "text-danger" })
             </div>
         </div>

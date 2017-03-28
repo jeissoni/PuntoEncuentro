@@ -15,15 +15,23 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.numIdUsuario)
+     
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.tipoIdNumUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoDocumento, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.tipoIdNumUsuario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tipoIdNumUsuario, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TipoDocumento, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.TipoDocumento, "", new {@class = "text-danger"})
             </div>
-        </div>*@
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.numIdUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.numIdUsuario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.numIdUsuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @*@Html.LabelFor(model => model.primerNombre, htmlAttributes: new { @class = "control-label col-md-2" })*@
@@ -88,7 +96,7 @@
                 <b>Fecha de Nacimiento</b>
             </div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.fechaNacimiento, "{0:dd/MM/yyyy}", new {htmlAttributes = new {@class = "form-control"}})
+                @Html.EditorFor(model => model.fechaNacimiento, new {htmlAttributes = new {@class = "form-control"}})
                 @Html.ValidationMessageFor(model => model.fechaNacimiento, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -160,6 +168,8 @@
             </div>
         </div>
 
+
+        @Html.Hidden("IdUsuarioViejo",Model.numIdUsuario)
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Guardar" class="btn btn-success" />
